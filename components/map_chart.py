@@ -120,6 +120,7 @@ def create_map(df_prov, geojson, tahun_range, kepemilikan):
         mapbox=dict(style='white-bg', center={'lat': -2.5, 'lon': 118}, zoom=3.5),
         margin={'r': 0, 't': 0, 'l': 0, 'b': 0},
         paper_bgcolor='rgba(0,0,0,0)',
+        uirevision='map-chart',
         showlegend=True,
         legend=dict(
             x=0.01, y=0.01,

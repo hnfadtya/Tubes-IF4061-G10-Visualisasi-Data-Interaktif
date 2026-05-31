@@ -166,7 +166,11 @@ app.layout = html.Div([
                     ], style={'display': 'flex', 'alignItems': 'center'}),
                 ], style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between', 'marginBottom': '16px'}),
                 
-                dcc.Graph(id='map-chart', style={'height': '420px'}),
+                dcc.Graph(
+                    id='map-chart',
+                    config={'scrollZoom': True, 'displayModeBar': True},
+                    style={'height': '420px'}
+                ),
             ], style={
                 'flex': '7', 
                 'backgroundColor': '#ffffff',
