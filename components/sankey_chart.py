@@ -1,21 +1,3 @@
-"""Sankey 'Dari Kebun ke Devisa'.
-
-Alur aliran (volume, ton):
-  Kepemilikan (Rakyat/Swasta/Negara)
-    -> Top-N provinsi + 'Provinsi Lain'
-      -> Produksi Nasional
-        -> Ekspor / Domestik
-           - Ekspor pecah ke top negara tujuan + 'Negara Lain'
-             (proporsi dari BPS, diterapkan ke volume ekspor data utama)
-           - Domestik berhenti sebagai satu node agregat (produksi - ekspor)
-
-Catatan data:
-  - Produksi & kepemilikan: data provinsi (CPO).
-  - Ekspor: data ekspor-impor (CPO).
-  - Proporsi negara tujuan: BPS (CPO+CPKO) -> dipakai sebagai persentase saja
-    agar total tetap balance dengan node Ekspor.
-  - Lapis negara tujuan hanya tersedia mulai DEST_YEAR_MIN (2012).
-"""
 import csv
 from pathlib import Path
 
@@ -27,7 +9,6 @@ BPS_FILE = DATA_DIR / "Ekspor_Minyak_Kelapa_Sawit_Menurut_Negara_Tujuan_Utama__2
 
 DEST_YEAR_MIN = 2012  # lapis negara tujuan baru tersedia mulai tahun ini
 
-# Palet selaras poster tubes 1
 GREEN = "#3B6D11"
 GREEN_LIGHT = "#97C459"
 ORANGE = "#D2601A"
@@ -66,10 +47,6 @@ def _bps_volume():
 
 
 def _dest_proportions(year, top_k=6):
-    """Proporsi negara tujuan untuk satu tahun: (list[(negara, prop)], prop_lain).
-
-    Mengembalikan None jika tahun di luar cakupan data BPS.
-    """
     vol = _bps_volume()
     any_year = next(iter(vol.values()))
     if year not in any_year:
@@ -88,13 +65,6 @@ def _dest_proportions(year, top_k=6):
 
 
 def create_sankey(df_prov, df_ekspor, year, kepemilikan, top_n=6):
-    """Bangun figure Sankey untuk satu tahun.
-
-    df_prov     : data provinsi mentah (punya kolom Produksi_<Kepemilikan>, Total_Produksi)
-    df_ekspor   : data ekspor-impor (punya Ekspor_Volume_Ton per Tahun)
-    year        : tahun snapshot (int)
-    kepemilikan : list subset dari ['Rakyat','Swasta','Negara']
-    """
     own_types = [k for k in ["Rakyat", "Swasta", "Negara"] if k in kepemilikan]
     if not own_types:
         own_types = ["Rakyat", "Swasta", "Negara"]
@@ -197,6 +167,7 @@ def create_sankey(df_prov, df_ekspor, year, kepemilikan, top_n=6):
             color="rgba(124,179,66,0.25)",
             hovertemplate="%{source.label} → %{target.label}<br>%{value:,.0f} ton<extra></extra>",
         ),
+        hoverlabel=dict(bgcolor="white", font=dict(color="black")),
     ))
     fig.update_layout(
         margin={"l": 8, "r": 8, "t": 8, "b": 8},

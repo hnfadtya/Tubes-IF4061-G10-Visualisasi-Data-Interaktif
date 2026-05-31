@@ -112,9 +112,9 @@ def create_trend(df_prov, tahun_range, provinsi, kepemilikan):
         ),
         hovermode='x unified',
         hoverlabel=dict(
-            bgcolor='#1F3D1A',
-            bordercolor='rgba(255,255,255,0.15)',
-            font=dict(size=12, color='#F5EFE0'),
+            bgcolor='white',
+            bordercolor='#CBD5E1',
+            font=dict(size=12, color='#1A2410'),
         ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',

@@ -123,36 +123,73 @@
 .Select-arrow {
     border-top-color: #6B7280 !important;
 }
-/* === Slider tahun: warna hijau sawit === */
 
-/* Track aktif (bagian terisi antara 2 handle) */
-.tahun-slider .rc-slider-track {
+/* === Slider tahun: warna hijau sawit (Dash 4.x / Radix) === */
+
+/* Bagian aktif / terisi */
+.tahun-slider .dash-slider-range {
     background-color: #3B6D11 !important;
-    height: 5px !important;
 }
 
-/* Rail (garis dasar belum terisi) */
-.tahun-slider .rc-slider-rail {
+/* Track dasar (belum terisi) */
+.tahun-slider .dash-slider-track {
     background-color: #E2E8F0 !important;
-    height: 5px !important;
 }
 
-/* Handle (bulatan yang digeser) */
-.tahun-slider .rc-slider-handle {
+/* Thumb (bulatan yang digeser) */
+.tahun-slider .dash-slider-thumb {
     border-color: #3B6D11 !important;
     background-color: #FFFFFF !important;
-    opacity: 1 !important;
 }
 
-/* Handle saat di-hover & aktif */
-.tahun-slider .rc-slider-handle:hover,
-.tahun-slider .rc-slider-handle-active,
-.tahun-slider .rc-slider-handle:focus {
-    border-color: #27500A !important;
+/* Thumb saat hover / fokus */
+.tahun-slider .dash-slider-thumb:hover,
+.tahun-slider .dash-slider-thumb:focus {
     box-shadow: 0 0 0 5px rgba(59, 109, 17, 0.15) !important;
+    outline: none !important;
 }
 
-/* Titik penanda (dots) saat aktif */
-.tahun-slider .rc-slider-dot-active {
+/* ---- Dropdown (Dash 4.x / Radix) - hijau sawit ---- */
+
+/* Tombol dropdown */
+.dash-dropdown {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    background-color: #FFFFFF !important;
+    min-height: 44px !important;
+    color: #374151 !important;
+}
+
+/* Hover */
+.dash-dropdown:hover {
+    border-color: #A7C77F !important;
+}
+
+/* Saat terbuka / fokus */
+.dash-dropdown[data-state="open"],
+.dash-dropdown:focus,
+.dash-dropdown:focus-visible {
     border-color: #3B6D11 !important;
+    box-shadow: 0 0 0 3px rgba(59, 109, 17, 0.12) !important;
+    outline: none !important;
+}
+
+/* Ikon panah */
+.dash-dropdown-trigger-icon {
+    color: #6B7280 !important;
+}
+
+/* Opsi saat di-hover / highlighted */
+.dash-dropdown-option[data-highlighted],
+.dash-dropdown-item[data-highlighted] {
+    background-color: #F2F7EA !important;
+    color: #27500A !important;
+}
+
+/* Opsi terpilih */
+.dash-dropdown-option[data-state="checked"],
+.dash-dropdown-item[data-state="checked"] {
+    background-color: #EAF3DE !important;
+    color: #27500A !important;
+    font-weight: 600 !important;
 }

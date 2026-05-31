@@ -250,7 +250,7 @@ def create_bubble(df_prov, provinsi_highlight, kepemilikan):
             showactive=False,
             x=0.0, y=-0.34, xanchor='left', yanchor='top',
             direction='left',
-            bgcolor='#6F42C1',        
+            bgcolor="#3b6d11",        
             font=dict(color='white', size=14),
             borderwidth=0,
             pad=dict(r=10, t=10, b=0, l=0),
