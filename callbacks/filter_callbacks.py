@@ -1,5 +1,5 @@
 import dash
-from dash import Input, Output, callback
+from dash import Input, Output, State,callback
 from components.kpi_cards   import create_kpi_cards
 from components.map_chart   import create_map
 from components.trend_chart import create_trend
@@ -68,3 +68,16 @@ def register_callbacks(app, df_prov, df_ekspor, geojson):
     )
     def update_tahun_labels(tahun_range):
         return str(tahun_range[0]), str(tahun_range[1])
+    
+    @callback(
+        Output('filter-kepemilikan', 'value'),
+        Output('kepemilikan-store', 'data'),
+        Input('filter-kepemilikan', 'value'),
+        State('kepemilikan-store', 'data')
+    )
+    def enforce_minimum_kepemilikan(current_value, last_valid):
+        # User menghapus semua pilihan
+        if not current_value:
+            return last_valid, last_valid
+
+        return current_value, current_value

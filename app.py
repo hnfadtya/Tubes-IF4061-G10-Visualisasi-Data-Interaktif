@@ -20,6 +20,10 @@ app = dash.Dash(__name__)
 app.title = "Dashboard Kelapa Sawit Indonesia"
 
 app.layout = html.Div([
+    dcc.Store(
+        id='kepemilikan-store',
+        data=['Rakyat', 'Swasta', 'Negara']
+    ),
     html.Div([
         html.Div([
             html.H1("Dashboard Industri Kelapa Sawit Indonesia",
