@@ -20,7 +20,12 @@ tahun_min = int(df_prov['Tahun'].min())
 tahun_max = int(df_prov['Tahun'].max()) 
 list_provinsi = sorted(df_prov['Provinsi'].unique())
 
-app = dash.Dash(__name__)
+app = dash.Dash(
+    __name__,
+    external_stylesheets=[
+        "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    ]
+)
 app.title = "Dashboard Kelapa Sawit Indonesia"
 
 app.layout = html.Div([
@@ -30,28 +35,23 @@ app.layout = html.Div([
     ),
     html.Div([
         html.Div([
-            html.H1("Dashboard Industri Kelapa Sawit Indonesia",
+            html.H1("SawitHub",
                     style={
-                        'margin': '0', 
-                        'fontSize': '24px', 
-                        'fontWeight': '700', 
-                        'color': '#111827',      
-                        'letterSpacing': '-0.5px' 
+                        'margin': '0',
+                        'fontSize': '30px',
+                        'fontWeight': '800',
+                        'color': '#1F3D1A',
+                        'letterSpacing': '-0.8px'
                     }),
-            html.P("Data 2010–2023 · Sumber: BPS & Ditjenbun",
+            html.P("Menyediakan Informasi Industri Kelapa Sawit Indonesia",
                     style={
-                        'margin': '6px 0 0', 
-                        'fontSize': '13px', 
+                        'margin': '6px 0 0',
+                        'fontSize': '14px',
                         'fontWeight': '400',
-                        'color': '#6B7280'      
+                        'color': '#6B7280'
                     }),
         ], style={
-            'backgroundColor': '#ffffff',           
-            'padding': '20px 24px',
-            'borderRadius': '8px',
-            'border': '1px solid #E5E7EB',
-            'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.05)', 
-            'marginBottom': '20px'
+            'marginBottom': '24px'
         }),
 
         html.Div([
@@ -236,12 +236,16 @@ app.layout = html.Div([
         html.Div([
             html.Div([
                 html.Div([
-                    html.P("Distribusi Produksi per Provinsi",
-                           style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}),
+                    html.P(
+                        "Distribusi Produksi per Provinsi",
+                        style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}
+                    ),
                     html.Div([
-                        html.Label("Snapshot tahun",
-                                   style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
-                                          'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}),
+                        html.Label(
+                            "Snapshot tahun",
+                            style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
+                                    'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}
+                        ),
                         dcc.Dropdown(
                             id='filter-tahun-map',
                             options=[{'label': str(y), 'value': y} for y in range(tahun_min, tahun_max+1)],
@@ -267,13 +271,15 @@ app.layout = html.Div([
             }),
 
             html.Div([
-                html.P("Komposisi Kepemilikan",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Komposisi Kepemilikan",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='donut-chart', style={'height': '420px'}),
             ], style={
                 'flex': '3', 
@@ -288,13 +294,15 @@ app.layout = html.Div([
 
         html.Div([
             html.Div([
-                html.P("Tren Produksi",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Tren Produksi",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='trend-chart', style={'height': '360px'}),
             ], style={
                 'flex': '6', 
@@ -306,13 +314,15 @@ app.layout = html.Div([
             }),
 
             html.Div([
-                html.P("Efisiensi Provinsi",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Efisiensi Provinsi",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='bubble-chart', style={'height': '360px'}),
             ], style={
                 'flex': '4', 
@@ -324,6 +334,64 @@ app.layout = html.Div([
             }),
         ], style={'display': 'flex', 'gap': '20px'}),
 
+        html.Div([
+            html.Div([
+                html.Div([
+                    html.P(
+                        "Aliran Sawit: Dari Kebun ke Devisa",
+                        style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}
+                    ),
+                    html.Div([
+                        html.Label(
+                            "Snapshot tahun",
+                            style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
+                                    'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}
+                        ),
+                        dcc.Dropdown(
+                            id='filter-tahun-sankey',
+                            options=[{'label': str(y), 'value': y} for y in range(tahun_min, tahun_max+1)],
+                            value=tahun_max,
+                            clearable=False,
+                            style={'fontSize': '13px', 'width': '90px'},
+                        ),
+                    ], style={'display': 'flex', 'alignItems': 'center'}
+                    ),
+                ], style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between', 'marginBottom': '8px'}
+                ),
+
+                html.P(
+                    "Kepemilikan → provinsi utama → produksi nasional → terbelah menjadi ekspor "
+                    "(ke negara tujuan) dan konsumsi domestik.",
+                    style={'fontSize': '12px', 'color': '#6B7280', 'margin': '0 0 8px'}
+                ),
+                html.Div(id='sankey-note'),
+                dcc.Graph(
+                    id='sankey-chart',
+                    config={'displayModeBar': True},
+                    style={'height': '520px'}
+                ),
+            ], style={
+                'flex': '1',
+                'backgroundColor': '#ffffff',
+                'border': '1px solid #E5E7EB',
+                'borderRadius': '12px',
+                'padding': '20px',
+                'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.02)'
+            }),
+        ], style={'display': 'flex', 'gap': '20px', 'marginTop': '20px'}),
+
+        html.Div(
+            "Sumber data: BPS & Direktorat Jenderal Perkebunan (Ditjenbun) · Data 2010–2023",
+            style={
+                'textAlign': 'center',
+                'fontSize': '12px',
+                'color': '#9CA3AF',
+                'marginTop': '32px',
+                'paddingTop': '20px',
+                'borderTop': '1px solid #E5E7EB'
+            }
+        ),
+
     ], style={
         'padding': '28px 32px',
         'overflowY': 'auto',
@@ -332,7 +400,7 @@ app.layout = html.Div([
     }),
 
 ], style={
-    'fontFamily': '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
+    'fontFamily': '"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', 
     'backgroundColor': '#F9FAFB', 
     'height': '100vh',
     'overflow': 'hidden',

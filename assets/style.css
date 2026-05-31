@@ -35,20 +35,20 @@
 
 /* Hover */
 .tag-checklist label:hover {
-    background-color: #EDE9FE !important;
-    color: #7C3AED !important;
-    border-color: #C4B5FD !important;
+    background-color: #EAF3DE !important;
+    color: #27500A !important;
+    border-color: #A7C77F !important;
 }
 
 /* Tag aktif */
 .tag-checklist label:has(input[type="checkbox"]:checked) {
-    background-color: #8B5CF6 !important;
+    background-color: #3B6D11 !important;
     color: #FFFFFF !important;
-    border-color: #7C3AED !important;
+    border-color: #27500A !important;
 
     font-weight: 600;
 
-    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+    box-shadow: 0 2px 8px rgba(59, 109, 17, 0.22);
 
     transform: translateY(-1px);
 }
@@ -64,19 +64,19 @@
 
 .Select-control {
     height: 44px !important;
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     border: 1px solid #E2E8F0 !important;
     background-color: #FFFFFF !important;
     box-shadow: none !important;
 }
 
 .Select-control:hover {
-    border-color: #C4B5FD !important;
+    border-color: #A7C77F !important;
 }
 
 .Select.is-focused .Select-control {
-    border-color: #8B5CF6 !important;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12) !important;
+    border-color: #3B6D11 !important;
+    box-shadow: 0 0 0 3px rgba(59, 109, 17, 0.12) !important;
 }
 
 /* Nilai yang dipilih */
@@ -94,7 +94,7 @@
 
 /* Menu dropdown */
 .Select-menu-outer {
-    border-radius: 10px !important;
+    border-radius: 12px !important;
     border: 1px solid #E2E8F0 !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
     margin-top: 4px !important;
@@ -108,18 +108,51 @@
 
 /* Hover opsi */
 .Select-option.is-focused {
-    background-color: #F5F3FF !important;
-    color: #7C3AED !important;
+    background-color: #F2F7EA !important;
+    color: #27500A !important;
 }
 
 /* Opsi terpilih */
 .Select-option.is-selected {
-    background-color: #EDE9FE !important;
-    color: #7C3AED !important;
+    background-color: #EAF3DE !important;
+    color: #27500A !important;
     font-weight: 600 !important;
 }
 
 /* Panah dropdown */
 .Select-arrow {
     border-top-color: #6B7280 !important;
+}
+/* === Slider tahun: warna hijau sawit === */
+
+/* Track aktif (bagian terisi antara 2 handle) */
+.tahun-slider .rc-slider-track {
+    background-color: #3B6D11 !important;
+    height: 5px !important;
+}
+
+/* Rail (garis dasar belum terisi) */
+.tahun-slider .rc-slider-rail {
+    background-color: #E2E8F0 !important;
+    height: 5px !important;
+}
+
+/* Handle (bulatan yang digeser) */
+.tahun-slider .rc-slider-handle {
+    border-color: #3B6D11 !important;
+    background-color: #FFFFFF !important;
+    opacity: 1 !important;
+}
+
+/* Handle saat di-hover & aktif */
+.tahun-slider .rc-slider-handle:hover,
+.tahun-slider .rc-slider-handle-active,
+.tahun-slider .rc-slider-handle:focus {
+    border-color: #27500A !important;
+    box-shadow: 0 0 0 5px rgba(59, 109, 17, 0.15) !important;
+}
+
+/* Titik penanda (dots) saat aktif */
+.tahun-slider .rc-slider-dot-active {
+    border-color: #3B6D11 !important;
 }

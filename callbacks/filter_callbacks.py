@@ -1,10 +1,11 @@
 import dash
-from dash import Input, Output, State,callback
+from dash import Input, Output, State, callback, html
 from components.kpi_cards   import create_kpi_cards
 from components.map_chart   import create_map
 from components.trend_chart import create_trend
 from components.donut_chart import create_donut
 from components.bubble_chart import create_bubble
+from components.sankey_chart import create_sankey, DEST_YEAR_MIN
 
 def register_callbacks(app, df_prov, df_ekspor, geojson):
 
@@ -39,6 +40,25 @@ def register_callbacks(app, df_prov, df_ekspor, geojson):
     )
     def update_kpi(tahun_range, provinsi, kepemilikan):
         return create_kpi_cards(df_prov, df_ekspor, tahun_range, provinsi, kepemilikan)
+
+    @callback(
+        Output('sankey-chart', 'figure'),
+        Output('sankey-note', 'children'),
+        Input('filter-tahun-sankey', 'value'),
+        Input('filter-kepemilikan', 'value'),
+    )
+    def update_sankey(tahun_sankey, kepemilikan):
+        fig, no_dest = create_sankey(df_prov, df_ekspor, tahun_sankey, kepemilikan)
+        note = None
+        if no_dest:
+            note = html.Div(
+                f"Rincian negara tujuan ekspor belum tersedia untuk {tahun_sankey} "
+                f"(data BPS dimulai {DEST_YEAR_MIN}); aliran berhenti di node Ekspor.",
+                style={'fontSize': '11px', 'color': '#92400E',
+                       'backgroundColor': '#FEF3C7', 'padding': '6px 10px',
+                       'borderRadius': '6px', 'margin': '0 0 8px'}
+            )
+        return fig, note
 
     @callback(
         Output('filter-provinsi', 'value'),

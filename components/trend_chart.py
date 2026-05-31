@@ -24,9 +24,9 @@ def create_trend(df_prov, tahun_range, provinsi, kepemilikan):
     df_trend['Total'] = df_trend[prod_cols].sum(axis=1)
 
     color_map = {
-        'Rakyat': '#E83E8C',  
-        'Swasta': '#6F42C1',   
-        'Negara': '#FFC107',   
+        'Rakyat': '#639922',  
+        'Swasta': '#D2601A',   
+        'Negara': '#B8860B',   
     }
 
     fig = go.Figure()
@@ -112,9 +112,9 @@ def create_trend(df_prov, tahun_range, provinsi, kepemilikan):
         ),
         hovermode='x unified',
         hoverlabel=dict(
-            bgcolor='white',
-            bordercolor='#E5E7EB',
-            font=dict(size=12, color='#111827'),
+            bgcolor='#1F3D1A',
+            bordercolor='rgba(255,255,255,0.15)',
+            font=dict(size=12, color='#F5EFE0'),
         ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',

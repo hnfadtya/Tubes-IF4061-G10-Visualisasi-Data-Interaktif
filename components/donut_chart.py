@@ -11,9 +11,9 @@ def create_donut(df_prov, tahun_range, provinsi, kepemilikan):
     values, labels, colors = [], [], []
     
     color_map = {
-        'Rakyat': '#6F42C1',   
-        'Swasta': '#E83E8C',   
-        'Negara': '#FFC107',   
+        'Rakyat': '#639922',   
+        'Swasta': '#D2601A',   
+        'Negara': '#B8860B',   
     }
 
     for k in ['Rakyat', 'Swasta', 'Negara']:
@@ -44,6 +44,7 @@ def create_donut(df_prov, tahun_range, provinsi, kepemilikan):
             x=0.5,                  
             font=dict(size=12)
         ),
+        hoverlabel=dict(bgcolor='#1F3D1A', bordercolor='rgba(255,255,255,0.15)', font=dict(size=12, color='#F5EFE0')),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
     )
