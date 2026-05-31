@@ -34,10 +34,11 @@ def register_callbacks(app, df_prov, df_ekspor, geojson):
     @callback(
         Output('kpi-cards', 'children'),
         Input('filter-tahun',       'value'),
+        Input('filter-provinsi',    'value'), 
         Input('filter-kepemilikan', 'value'),
     )
-    def update_kpi(tahun_range, kepemilikan):
-        return create_kpi_cards(df_prov, df_ekspor, tahun_range, kepemilikan)
+    def update_kpi(tahun_range, provinsi, kepemilikan):
+        return create_kpi_cards(df_prov, df_ekspor, tahun_range, provinsi, kepemilikan)
 
     @callback(
         Output('filter-provinsi', 'value'),
@@ -59,3 +60,11 @@ def register_callbacks(app, df_prov, df_ekspor, geojson):
         except (KeyError, IndexError, TypeError):
             pass
         return dash.no_update
+    
+    @callback(
+        Output('tahun-min-label', 'children'),
+        Output('tahun-max-label', 'children'),
+        Input('filter-tahun', 'value')
+    )
+    def update_tahun_labels(tahun_range):
+        return str(tahun_range[0]), str(tahun_range[1])
