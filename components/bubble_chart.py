@@ -241,7 +241,7 @@ def create_bubble(df_prov, provinsi_highlight, kepemilikan):
             zeroline=False,
         ),
         hovermode='closest',
-        hoverlabel=dict(bgcolor='white', bordercolor='#E5E7EB', font=dict(size=12)),
+        hoverlabel=dict(bgcolor='white', bordercolor='#E5E7EB', font=dict(size=12, color='black')),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
 
