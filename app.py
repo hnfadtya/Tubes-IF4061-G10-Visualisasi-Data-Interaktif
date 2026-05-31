@@ -228,12 +228,16 @@ app.layout = html.Div([
         html.Div([
             html.Div([
                 html.Div([
-                    html.P("Distribusi Produksi per Provinsi",
-                           style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}),
+                    html.P(
+                        "Distribusi Produksi per Provinsi",
+                        style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}
+                    ),
                     html.Div([
-                        html.Label("Snapshot tahun",
-                                   style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
-                                          'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}),
+                        html.Label(
+                            "Snapshot tahun",
+                            style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
+                                    'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}
+                        ),
                         dcc.Dropdown(
                             id='filter-tahun-map',
                             options=[{'label': str(y), 'value': y} for y in range(tahun_min, tahun_max+1)],
@@ -259,13 +263,15 @@ app.layout = html.Div([
             }),
 
             html.Div([
-                html.P("Komposisi Kepemilikan",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Komposisi Kepemilikan",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='donut-chart', style={'height': '420px'}),
             ], style={
                 'flex': '3', 
@@ -280,13 +286,15 @@ app.layout = html.Div([
 
         html.Div([
             html.Div([
-                html.P("Tren Produksi",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Tren Produksi",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='trend-chart', style={'height': '360px'}),
             ], style={
                 'flex': '6', 
@@ -298,13 +306,15 @@ app.layout = html.Div([
             }),
 
             html.Div([
-                html.P("Efisiensi Provinsi",
-                       style={
-                           'fontSize': '20px', 
-                           'fontWeight': '600', 
-                           'color': '#111827', 
-                           'margin': '0 0 16px'
-                       }),
+                html.P(
+                    "Efisiensi Provinsi",
+                    style={
+                        'fontSize': '20px', 
+                        'fontWeight': '600', 
+                        'color': '#111827', 
+                        'margin': '0 0 16px'
+                    }
+                ),
                 dcc.Graph(id='bubble-chart', style={'height': '360px'}),
             ], style={
                 'flex': '4', 
@@ -315,6 +325,52 @@ app.layout = html.Div([
                 'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.02)'
             }),
         ], style={'display': 'flex', 'gap': '20px'}),
+
+        html.Div([
+            html.Div([
+                html.Div([
+                    html.P(
+                        "Aliran Sawit: Dari Kebun ke Devisa",
+                        style={'fontSize': '20px', 'fontWeight': '600', 'color': '#111827', 'margin': '0'}
+                    ),
+                    html.Div([
+                        html.Label(
+                            "Snapshot tahun",
+                            style={'fontSize': '10px', 'fontWeight': '700', 'color': '#9CA3AF',
+                                    'letterSpacing': '0.5px', 'marginRight': '8px', 'whiteSpace': 'nowrap'}
+                        ),
+                        dcc.Dropdown(
+                            id='filter-tahun-sankey',
+                            options=[{'label': str(y), 'value': y} for y in range(tahun_min, tahun_max+1)],
+                            value=tahun_max,
+                            clearable=False,
+                            style={'fontSize': '13px', 'width': '90px'},
+                        ),
+                    ], style={'display': 'flex', 'alignItems': 'center'}
+                    ),
+                ], style={'display': 'flex', 'alignItems': 'center', 'justifyContent': 'space-between', 'marginBottom': '8px'}
+                ),
+
+                html.P(
+                    "Kepemilikan → provinsi utama → produksi nasional → terbelah menjadi ekspor "
+                    "(ke negara tujuan) dan konsumsi domestik.",
+                    style={'fontSize': '12px', 'color': '#6B7280', 'margin': '0 0 8px'}
+                ),
+                html.Div(id='sankey-note'),
+                dcc.Graph(
+                    id='sankey-chart',
+                    config={'displayModeBar': True},
+                    style={'height': '520px'}
+                ),
+            ], style={
+                'flex': '1',
+                'backgroundColor': '#ffffff',
+                'border': '1px solid #E5E7EB',
+                'borderRadius': '12px',
+                'padding': '20px',
+                'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.02)'
+            }),
+        ], style={'display': 'flex', 'gap': '20px', 'marginTop': '20px'}),
 
     ], style={
         'padding': '28px 32px',
