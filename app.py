@@ -20,134 +20,212 @@ app = dash.Dash(__name__)
 app.title = "Dashboard Kelapa Sawit Indonesia"
 
 app.layout = html.Div([
-
     html.Div([
         html.Div([
             html.H1("Dashboard Industri Kelapa Sawit Indonesia",
                     style={
                         'margin': '0', 
-                        'fontSize': '20px', 
+                        'fontSize': '24px', 
                         'fontWeight': '700', 
                         'color': '#111827',      
                         'letterSpacing': '-0.5px' 
                     }),
             html.P("Data 2010–2023 · Sumber: BPS & Ditjenbun",
-                   style={
-                       'margin': '6px 0 0', 
-                       'fontSize': '12px', 
-                       'fontWeight': '400',
-                       'color': '#6B7280'      
-                   }),
-        ]),
+                    style={
+                        'margin': '6px 0 0', 
+                        'fontSize': '13px', 
+                        'fontWeight': '400',
+                        'color': '#6B7280'      
+                    }),
+        ], style={
+            'backgroundColor': '#ffffff',           
+            'padding': '20px 24px',
+            'borderRadius': '8px',
+            'border': '1px solid #E5E7EB',
+            'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.05)', 
+            'marginBottom': '20px'
+        }),
 
         html.Div([
             html.Div([
-                html.Label("RENTANG TAHUN",
-                           style={
-                               'fontSize': '10px', 
-                               'fontWeight': '700', 
-                               'color': '#4B5563',
-                               'letterSpacing': '0.5px', 
-                               'marginBottom': '6px', 
-                               'display': 'block'
-                           }),
-                dcc.RangeSlider(
-                    id='filter-tahun',
-                    min=tahun_min, max=tahun_max,
-                    value=[tahun_min, tahun_max],
-                    step=1,
-                    marks={y: {'label': str(y), 'style': {'fontSize': '10px', 'color': '#9CA3AF'}} for y in range(tahun_min, tahun_max+1, 2)},
-                    tooltip={'placement': 'bottom', 'always_visible': False},
+                html.Label(
+                    "RENTANG TAHUN",
+                    style={
+                        'fontSize': '10px',
+                        'fontWeight': '700',
+                        'color': '#4B5563',
+                        'letterSpacing': '0.5px',
+                        'marginBottom': '16px',
+                        'display': 'block'
+                    }
                 ),
-            ], style={'width': '260px'}),
 
+                html.Div([
+                    html.Span(
+                        str(tahun_min),
+                        id  = 'tahun-min-label',
+                        style={
+                            'fontSize': '13px',
+                            'fontWeight': '600',
+                            'color': '#6B7280',
+                            'minWidth': '36px',
+                            'textAlign': 'center',
+                            'position': 'relative',
+                            'top': '-12px'
+                        }
+                    ),
+                    # Slider
+                    html.Div([
+                        dcc.RangeSlider(
+                            id='filter-tahun',
+                            min=tahun_min,
+                            max=tahun_max,
+                            value=[tahun_min, tahun_max],
+                            step=1,
+                            className='tahun-slider',
+                            marks={
+                                y: {
+                                    'label': str(y),
+                                    'style': {
+                                        'fontSize': '10px',
+                                        'color': '#9CA3AF'
+                                    }
+                                }
+                                for y in range(tahun_min, tahun_max + 1, 2)
+                            },
+                            tooltip={
+                                'placement': 'bottom',
+                                'always_visible': False
+                            }
+                        )
+                    ], style={
+                        'flex': '1',
+                        'padding': '0 12px'
+                    }),
+
+                    html.Span(
+                        str(tahun_max),
+                        id  = 'tahun-max-label',
+                        style={
+                            'fontSize': '13px',
+                            'fontWeight': '600',
+                            'color': '#6B7280',
+                            'minWidth': '36px',
+                            'textAlign': 'center',
+                            'position': 'relative',
+                            'top': '-12px'
+                        }
+                    ),
+
+                ], style={
+                    'display': 'flex',
+                    'alignItems': 'center'
+                })
+
+            ], style={
+                'flex': '2.6',
+                'paddingRight': '24px'
+            }),
+
+            # garis vertikal
+            html.Div(style={
+                'width': '1px',
+                'backgroundColor': '#E5E7EB'
+            }),
+
+            # provinsi
             html.Div([
-                html.Label("PROVINSI",
-                           style={
-                               'fontSize': '10px', 
-                               'fontWeight': '700', 
-                               'color': '#4B5563', 
-                               'letterSpacing': '0.5px', 
-                               'marginBottom': '6px', 
-                               'display': 'block'
-                           }),
+                html.Label(
+                    "PROVINSI",
+                    style={
+                        'fontSize': '10px',
+                        'fontWeight': '700',
+                        'color': '#4B5563',
+                        'letterSpacing': '0.5px',
+                        'marginBottom': '10px',
+                        'display': 'block'
+                    }
+                ),
+
                 dcc.Dropdown(
                     id='filter-provinsi',
-                    options=[{'label': 'Semua Provinsi', 'value': 'ALL'}] +
-                            [{'label': p, 'value': p} for p in list_provinsi],
+                    options=[
+                        {'label': 'Semua Provinsi', 'value': 'ALL'}
+                    ] + [
+                        {'label': p, 'value': p}
+                        for p in list_provinsi
+                    ],
                     value='ALL',
                     clearable=False,
+                    className='dropdown-provinsi',
                     style={
-                        'fontSize': '13px', 
-                        'minWidth': '180px', 
-                        'borderRadius': '6px',
+                        'fontSize': '13px',
                         'color': '#374151'
-                    },
+                    }
                 ),
-            ]),
+            ], style={
+                'flex': '1',
+                'padding': '0 24px'
+            }),
 
+            # garis vertikal
+            html.Div(style={
+                'width': '1px',
+                'backgroundColor': '#E5E7EB'
+            }),
+
+            # kepemilikan
             html.Div([
-                html.Label("JENIS KEPEMILIKAN",
-                           style={
-                               'fontSize': '10px', 
-                               'fontWeight': '700', 
-                               'color': '#4B5563', 
-                               'letterSpacing': '0.5px', 
-                               'marginBottom': '6px', 
-                               'display': 'block'
-                           }),
+                html.Label(
+                    "JENIS KEPEMILIKAN",
+                    style={
+                        'fontSize': '10px',
+                        'fontWeight': '700',
+                        'color': '#4B5563',
+                        'letterSpacing': '0.5px',
+                        'marginBottom': '10px',
+                        'display': 'block'
+                    }
+                ),
+
                 dcc.Checklist(
                     id='filter-kepemilikan',
                     options=[
-                        {'label': ' Swasta',  'value': 'Swasta'},
-                        {'label': ' Rakyat',  'value': 'Rakyat'},
-                        {'label': ' Negara',  'value': 'Negara'},
+                        {'label': 'Swasta', 'value': 'Swasta'},
+                        {'label': 'Rakyat', 'value': 'Rakyat'},
+                        {'label': 'Negara', 'value': 'Negara'},
                     ],
                     value=['Rakyat', 'Swasta', 'Negara'],
-                    labelStyle={
-                        'display': 'inline-flex', 
-                        'alignItems': 'center',
-                        'fontSize': '13px', 
-                        'fontWeight': '500',
-                        'color': '#374151',
-                        'marginRight': '14px', 
-                        'cursor': 'pointer'
-                    },
                     inline=True,
+                    className='tag-checklist'
                 ),
-            ]),
+            ], style={
+                'flex': '1.4',
+                'paddingLeft': '24px'
+            }),
+
         ], style={
             'display': 'flex',
-            'alignItems': 'center',
-            'gap': '28px',
-            'flexWrap': 'wrap',
+            'alignItems': 'stretch',
+            'backgroundColor': '#ffffff',
+            'border': '1px solid #E5E7EB',
+            'borderRadius': '12px',
+            'padding': '20px 24px',
+            'marginBottom': '28px',
+            'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.02)'
         }),
 
-    ], style={
-        'display': 'flex',
-        'alignItems': 'center',
-        'justifyContent': 'space-between',
-        'padding': '18px 32px',
-        'backgroundColor': '#ffffff',
-        'borderBottom': '1px solid #E5E7EB',
-        'boxShadow': '0 1px 3px 0 rgba(0, 0, 0, 0.05)', 
-        'flexWrap': 'wrap',
-        'gap': '16px',
-        'boxSizing': 'border-box',
-        'width': '100%'
-    }),
-
-    html.Div([
-
-        html.Div(id='kpi-cards', style={
-            'display': 'grid',
-            'gridTemplateColumns': 'repeat(5, 1fr)',
-            'gap': '16px',
-            'marginBottom': '24px',
-        }),
+        html.Div(
+            id='kpi-cards',
+            style={
+                'display': 'grid',
+                'gridTemplateColumns': 'repeat(5, minmax(220px, 1fr))',
+                'gap': '20px',
+                'marginBottom': '28px'
+            }
+        ),
 
         html.Div([
-            
             html.Div([
                 html.Div([
                     html.P("Distribusi Produksi per Provinsi",
@@ -239,9 +317,9 @@ app.layout = html.Div([
         ], style={'display': 'flex', 'gap': '20px'}),
 
     ], style={
-        'padding': '24px 32px', 
+        'padding': '28px 32px',
         'overflowY': 'auto',
-        'flex': '1',
+        'height': '100vh',
         'boxSizing': 'border-box'
     }),
 
@@ -257,4 +335,5 @@ app.layout = html.Div([
 if __name__ == '__main__':
     from callbacks.filter_callbacks import register_callbacks
     register_callbacks(app, df_prov, df_ekspor, geojson)
+    
     app.run(debug=True)

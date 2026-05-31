@@ -1,0 +1,125 @@
+.tag-checklist input[type="checkbox"] {
+    display: none !important;
+}
+
+.tag-checklist {
+    display: flex;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+
+.tag-checklist label {
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+
+    width: 120px;
+    height: 44px;
+
+    background-color: #F8FAFC !important;
+    color: #475569 !important;
+
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 9999px !important;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-right: 0 !important;
+    box-sizing: border-box;
+}
+
+/* Hover */
+.tag-checklist label:hover {
+    background-color: #EDE9FE !important;
+    color: #7C3AED !important;
+    border-color: #C4B5FD !important;
+}
+
+/* Tag aktif */
+.tag-checklist label:has(input[type="checkbox"]:checked) {
+    background-color: #8B5CF6 !important;
+    color: #FFFFFF !important;
+    border-color: #7C3AED !important;
+
+    font-weight: 600;
+
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+
+    transform: translateY(-1px);
+}
+
+.tahun-slider .dash-range-slider-input {
+    display: none !important;
+}
+
+.tahun-slider {
+    width: 100%;
+}
+
+
+.Select-control {
+    height: 44px !important;
+    border-radius: 10px !important;
+    border: 1px solid #E2E8F0 !important;
+    background-color: #FFFFFF !important;
+    box-shadow: none !important;
+}
+
+.Select-control:hover {
+    border-color: #C4B5FD !important;
+}
+
+.Select.is-focused .Select-control {
+    border-color: #8B5CF6 !important;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12) !important;
+}
+
+/* Nilai yang dipilih */
+.Select-value-label {
+    color: #374151 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+}
+
+/* Placeholder */
+.Select-placeholder {
+    color: #9CA3AF !important;
+    font-size: 13px !important;
+}
+
+/* Menu dropdown */
+.Select-menu-outer {
+    border-radius: 10px !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    margin-top: 4px !important;
+}
+
+/* Opsi */
+.Select-option {
+    font-size: 13px !important;
+    padding: 10px 14px !important;
+}
+
+/* Hover opsi */
+.Select-option.is-focused {
+    background-color: #F5F3FF !important;
+    color: #7C3AED !important;
+}
+
+/* Opsi terpilih */
+.Select-option.is-selected {
+    background-color: #EDE9FE !important;
+    color: #7C3AED !important;
+    font-weight: 600 !important;
+}
+
+/* Panah dropdown */
+.Select-arrow {
+    border-top-color: #6B7280 !important;
+}
