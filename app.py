@@ -3,13 +3,17 @@ from dash import dcc, html
 import pandas as pd
 import json
 from geojson_rewind import rewind
+from pathlib import Path
 
-df_prov = pd.read_csv('data/palm_oil_area_and_production_by_province.csv')
-df_ekspor = pd.read_csv('data/ekspor_impor_palm_oil_2010_2023.csv')
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / 'data'
 
-with open('data/indonesia.json', 'r') as f:
+df_prov = pd.read_csv(DATA_DIR / 'palm_oil_area_and_production_by_province.csv')
+df_ekspor = pd.read_csv(DATA_DIR / 'ekspor_impor_palm_oil_2010_2023.csv')
+
+with open(DATA_DIR / 'indonesia.json', 'r') as f:
     geojson = json.load(f)
-
+    
 geojson = rewind(geojson)
 
 tahun_min = int(df_prov['Tahun'].min())   
@@ -336,8 +340,10 @@ app.layout = html.Div([
     'flexDirection': 'column'
 })
 
+from callbacks.filter_callbacks import register_callbacks
+register_callbacks(app, df_prov, df_ekspor, geojson)
+
+server = app.server
+
 if __name__ == '__main__':
-    from callbacks.filter_callbacks import register_callbacks
-    register_callbacks(app, df_prov, df_ekspor, geojson)
-    
     app.run(debug=True)
